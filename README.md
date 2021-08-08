@@ -8,7 +8,7 @@ codewar: (Wikipedia) es una comunidad educativa de programación de sistemas. En
 
 ---
 
-Correo: Dependiendo de la empresa a veces mandan a resolver los challenges por la plataforma de coderbyte, o mandan un correo con el problema para resolverlo en la plataforma local.
+Correo: Dependiendo de la empresa a veces mandan a resolver los challenges por la plataforma de coderbyte, por sus propias plataformas, o mandan un correo con el problema para resolverlo en la plataforma local.
 
 El siguiente ejercicio fué enviado por correo, para resolverlo localmente:
 
