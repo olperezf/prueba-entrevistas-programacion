@@ -1,4 +1,4 @@
-# Pruebas de entrevista de programación
+# Ejercicios - Pruebas de entrevista de programación
 ---
 Ejercicios y Pruebas reales de entrevistas basados en las páginas de challenge de programación más conocidas como: 
 
