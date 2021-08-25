@@ -91,3 +91,34 @@ Solución para que pueda calcular el proceso en menos de un segundo:
         return array
     end
     
+    
+## Ejercicio #2:
+    Plataforma: TestDome
+    Lenguaje: Ruby
+
+Implementar la función sort_by_price_ascending, which: 
+- Acepta una cadena en formato JSON.
+- Ordena los artículos por precio en orden ascendente.
+- Si dos productos tienen el mismo precio, los ordena por su nombre en orden alfabético.
+- Devuelve una cadena en formato JSON que es equivalente a la del formato de entrada.
+
+Solución:
+
+    require 'json'
+    
+    def sort_by_price_ascending(json_string)
+        return (JSON[json_string].sort_by{ |hash| hash['price'].to_s + hash['name'].to_s }).to_json
+    end
+    
+    puts sort_by_price_ascending('[{"name":"eggs","price":1},{"name":"coffe","price":1},{"name":"korn","price":9.99},{"name":"rice","price":4.04},{"name":"banana","price":1},{"name":"platano","price":4.04}]')
+    
+Salida en consola:
+
+    [{"name":"banana","price":1},{"name":"coffe","price":1},{"name":"eggs","price":1},{"name":"platano","price":4.04},{"name":"rice","price":4.04},{"name":"korn","price":9.99}]
+    
+Análisis:
+
+require 'json': Requerimos del método require para invocar la librería 'json'
+JSON[json_string]: Genera un hash a partir del json.
+sort_by{ |hash| hash['price'].to_s + hash['name'].to_s }: utilizamos el método sort_by para ordenar; primero ordena por nombre alfabéticamente, y luego por el precio.
+to_json: Convierte el hash en formato json
