@@ -118,7 +118,52 @@ Salida en consola:
     
 Análisis:
 
-require 'json': Requerimos del método require para invocar la librería 'json'
-JSON[json_string]: Genera un hash a partir del json.
-sort_by{ |hash| hash['price'].to_s + hash['name'].to_s }: utilizamos el método sort_by para ordenar; primero ordena por nombre alfabéticamente, y luego por el precio.
-to_json: Convierte el hash en formato json
+require 'json' : Requerimos del método require para invocar la librería 'json'   
+JSON[json_string] : Genera un hash a partir del json.    
+sort_by{ |hash| hash['price'].to_s + hash['name'].to_s } : Utilizamos el método sort_by para ordenar; primero ordena por nombre alfabéticamente, y luego por el precio.  
+to_json : Convierte el hash en formato json
+
+
+## Ejercicio #3:
+    Plataforma: TestDome
+    Lenguaje: Ruby
+    
+Una aplicación requiere que diferentes formatos de fecha se conviertan en un formato de fecha común.    
+Implemente la función transform_date_format que acepta una lista de fechas como cadenas y devuelve
+una nueva lista de cadenas que representan fechas en el formato AAAAMMDD. Todas las fechas de ingreso serán válidas,
+pero solo aquellas que tengan los siguientes formatos: AAAA / MM / DD, DD / MM / AAAA y MM-DD-AAAA deben ser
+incluido en la lista devuelta, donde AAAA, MM y DD son números que representan año, mes y día, respectivamente.
+
+Ejemplo:
+
+    transform_date_format(["2010/02/20","19/12/2016","11-18-2012","20130720"]) 
+    debería retornar una lista:  ["20100220","20161219","20121118"].
+    
+
+Solución:
+
+    require 'date'
+    
+    def transform_date_format(dates)
+       result =[]
+       for key in 0..(dates.length-1) do
+         result.push(Date.strptime(dates[key], "%m-%d-%Y").strftime('%Y%m%d')) if dates[key].include?"-"
+         result.push(Date.parse(dates[key]).strftime('%Y%m%d')) if dates[key].include?"/"
+       end 
+       return result
+    end  
+
+    p transform_date_format(["2010/02/20", "19/12/2016", "11-18-2012", "20130720"])
+    
+Salida consola:
+
+    ["20100220", "20161219", "20121118"]
+    
+Análisis:  
+
+Date.strptime : es un método de clase DateTime que analiza la representación dada de fecha y hora con la plantilla dada.    
+strftime('%Y%m%d') : es un método de clase de tiempo que devuelve el formato.   
+Date.parse(dates[key]) : parsea  formatos de fechas incluyendo yyyy/mm/dd, dd/mm/yyyy.   
+Pero este tipo de formato: mm-dd-yyyy, no lo reconoce
+
+
