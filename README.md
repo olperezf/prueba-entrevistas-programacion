@@ -12,15 +12,18 @@ TestDome: pruebas automatizadas de habilidades previas al empleo. Para probar si
 
 Correo: Dependiendo de la empresa a veces mandan a resolver los challenges por la plataforma de coderbyte, por sus propias plataformas, o mandan un correo con el problema para resolverlo en la plataforma local.
 
+Para ver la solución del ejercicio hacer Click a la pregunta.
+
 El siguiente ejercicio fué enviado por correo, para resolverlo localmente:
 
 ## Ejercicio #1:
     Plataforma: Correo
     Lenguaje: Ruby
 
-Sin usar el built-in method de ruby que se llama "rotate":
-Dado un arreglo A de N índices [A(0), A(1), A(2), ..., A(N-1), A(N)] se dice que se "rota" una vez quedando A(K=1)=[A(N), A(0), A(1), A(2), ..., A(N-1)], esta rotación puede ocurrir K veces dando como resultado un arreglo final B.
-
+<details>
+    <summary>Sin usar el built-in method de ruby que se llama "rotate":
+Dado un arreglo A de N índices [A(0), A(1), A(2), ..., A(N-1), A(N)] se dice que se "rota" una vez quedando A(K=1)=[A(N), A(0), A(1), A(2), ..., A(N-1)], esta rotación puede ocurrir K veces dando como resultado un arreglo final B.</summary> 
+    
 a) Desarrolle un método que dado un array A y una cantidad K, rote el array K veces dando un array B. Ejemplo:
 
     A = [1,2,3,4,5]
@@ -93,17 +96,20 @@ Solución para que pueda calcular el proceso en menos de un segundo:
         return array
     end
     
+</details>
+    
     
 ## Ejercicio #2:
     Plataforma: TestDome
     Lenguaje: Ruby
-
-Implementar la función sort_by_price_ascending, which: 
+    
+<details>
+    <summary>Implementar la función sort_by_price_ascending, which: 
 - Acepta una cadena en formato JSON.
 - Ordena los artículos por precio en orden ascendente.
 - Si dos productos tienen el mismo precio, los ordena por su nombre en orden alfabético.
-- Devuelve una cadena en formato JSON que es equivalente a la del formato de entrada.
-
+- Devuelve una cadena en formato JSON que es equivalente a la del formato de entrada.</summary>
+    
 Solución:
 
     require 'json'
@@ -124,13 +130,16 @@ require 'json' : Requerimos del método require para invocar la librería 'json'
 JSON[json_string] : Genera un hash a partir del json.    
 sort_by{ |hash| hash['price'].to_s + hash['name'].to_s } : Utilizamos el método sort_by para ordenar; primero ordena por nombre alfabéticamente, y luego por el precio.  
 to_json : Convierte el hash en formato json
+    
+</details>
 
 
 ## Ejercicio #3:
     Plataforma: TestDome
     Lenguaje: Ruby
     
-Una aplicación requiere que diferentes formatos de fecha se conviertan en un formato de fecha común.    
+<details>
+    <summary> Una aplicación requiere que diferentes formatos de fecha se conviertan en un formato de fecha común.    
 Implemente la función transform_date_format que acepta una lista de fechas como cadenas y devuelve
 una nueva lista de cadenas que representan fechas en el formato AAAAMMDD. Todas las fechas de ingreso serán válidas,
 pero solo aquellas que tengan los siguientes formatos: AAAA / MM / DD, DD / MM / AAAA y MM-DD-AAAA deben ser
@@ -139,8 +148,8 @@ incluido en la lista devuelta, donde AAAA, MM y DD son números que representan 
 Ejemplo:
 
     transform_date_format(["2010/02/20","19/12/2016","11-18-2012","20130720"]) 
-    debería retornar una lista:  ["20100220","20161219","20121118"].
-    
+    debería retornar una lista:  ["20100220","20161219","20121118"]. 
+</summary>
 
 Solución:
 
@@ -167,5 +176,7 @@ Date.strptime : es un método de clase DateTime que analiza la representación d
 strftime('%Y%m%d') : es un método de clase de tiempo que devuelve el formato.   
 Date.parse(dates[key]) : parsea  formatos de fechas incluyendo yyyy/mm/dd, dd/mm/yyyy.   
 Pero este tipo de formato: mm-dd-yyyy, no lo reconoce
+    
+</details>
 
 
