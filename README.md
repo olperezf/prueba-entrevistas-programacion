@@ -12,7 +12,7 @@ TestDome: pruebas automatizadas de habilidades previas al empleo. Para probar si
 
 Correo: Dependiendo de la empresa a veces mandan a resolver los challenges por la plataforma de coderbyte, por sus propias plataformas, o mandan un correo con el problema para resolverlo en la plataforma local.
 
-Para ver la solución del ejercicio hacer Click a la pregunta.
+Para ver la solución del ejercicio hacer Click en la pregunta.
 
 El siguiente ejercicio fué enviado por correo, para resolverlo localmente:
 
