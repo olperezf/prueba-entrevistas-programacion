@@ -180,3 +180,88 @@ Pero este tipo de formato: mm-dd-yyyy, no lo reconoce
 </details>
 
 
+## Ejercicio #4:
+    Plataforma: Coderbyte
+    Lenguaje: Ruby
+    
+<details>
+    <summary> En el archivo Ruby, escriba un programa para realizar una solicitud GET en la ruta https://coderbyte.com/api/challenges/json/age-counting
+ que contiene una clave de datos y el valor es una cadena que contiene elementos en el formato: key = STRING, age = INTEGER. Tu objetivo es contar cómo
+ Existen muchos elementos que tienen una edad igual o superior a 50, e imprime este valor final
+
+Ejemplo:
+
+    {"data":"key=IAfpK, age=58, key=WNVdi, age=64, key=jp9zt, age=47}
+    Salida:
+           2 
+        
+</summary>
+
+Solución:
+
+    require 'net/http'
+    require 'json'
+    def age_counting
+      uri = URI('https://coderbyte.com/api/challenges/json/age-counting')
+      response = Net::HTTP.get(uri)
+      return  Hash[*JSON.parse(response)["data"].scan(/\b(?!age\b)\b(?!key\b)\w+/)].select{|k,v| v.to_i >= 50}.size
+    end
+
+    
+Salida consola:
+
+     => 128   -> Registros
+    
+Análisis:  
+
+require 'net/http' : Proporciona una biblioteca rica que se puede utilizar para crear agentes de usuario HTTP   
+require 'json' : JSON (JavaScript Object Notation) Es un formato de intercambio de datos ligero 
+URI('https://coderbyte.com/api/challenges/json/age-counting') : URI es un módulo que proporciona clases para manejar identificadores uniformes de recursos. 
+Para esta url URI lo convierte asi:
+    
+        #<URI::HTTPS https://coderbyte.com/api/challenges/json/age-counting>
+
+response = Net::HTTP.get(uri) : Obtenemos los datos de la página que estamos consultando; en esta url 'https://coderbyte.com/api/challenges/json/age-counting'
+obtenemos 300 registros, para nuestro ejemplo voy a tomar una muestra de 20 registros que obtenemos del response:
+    
+    "{\"data\":\"key=IAfpK, age=58, key=WNVdi, age=64, key=jp9zt, age=47, key=0Sr4C, age=68, key=CGEqo, age=76, key=IxKVQ, age=79, key=eD221, age=29, 
+     key=XZbHV, age=32, key=k1SN5, age=88, key=4SCsU, age=65, key=q3kG6, age=33, key=MGQpf, age=13, key=Kj6xW, age=14, key=tg2VM, age=30, key=WSnCU,
+     age=24, key=f1Vvz, age=46, key=dOS7A, age=72, key=tDojg, age=82, key=nZyJA, age=48, key=R8JTk, age=29\"}"
+
+JSON.parse(response) : Parseamos los resgistros quedando un hash.
+    
+    {"data"=>"key=IAfpK, age=58, key=WNVdi, age=64, key=jp9zt, age=47, key=0Sr4C, age=68, key=CGEqo, age=76, key=IxKVQ, age=79, key=eD221, age=29, key=XZbHV,
+    age=32, key=k1SN5, age=88, key=4SCsU, age=65, key=q3kG6, age=33, key=MGQpf, age=13, key=Kj6xW, age=14, key=tg2VM, age=30, key=WSnCU, age=24,
+    key=f1Vvz, age=46, key=dOS7A, age=72, key=tDojg, age=82, key=nZyJA, age=48, key=R8JTk, age=29"}
+
+JSON.parse(response)["data"] : Obtendremos el value string.
+    
+    "key=IAfpK, age=58, key=WNVdi, age=64, key=jp9zt, age=47, key=0Sr4C, age=68, key=CGEqo, age=76, key=IxKVQ, age=79, key=eD221, age=29, key=XZbHV, 
+    age=32, key=k1SN5, age=88, key=4SCsU, age=65, key=q3kG6, age=33, key=MGQpf, age=13, key=Kj6xW, age=14, key=tg2VM, age=30, key=WSnCU, age=24,
+    key=f1Vvz, age=46, key=dOS7A, age=72, key=tDojg, age=82, key=nZyJA, age=48, key=R8JTk, age=29"
+    
+JSON.parse(response)["data"].scan(/\b(?!age\b)\b(?!key\b)\w+/) : Escaneamos toda la cadena convirtiendola en un array eliminando las palabras "key", "age", la coma "," y el igual "=", separando todo en elementos.
+    
+    ["IAfpK", "58", "WNVdi", "64", "jp9zt", "47", "0Sr4C", "68", "CGEqo", "76", "IxKVQ", "79", "eD221", "29", "XZbHV", "32", "k1SN5", "88", 
+    "4SCsU", "65", "q3kG6", "33", "MGQpf", "13", "Kj6xW", "14", "tg2VM", "30", "WSnCU", "24", "f1Vvz", "46", "dOS7A", "72", "tDojg", "82", 
+    "nZyJA", "48", "R8JTk", "29"]
+
+Hash[*JSON.parse(response)["data"].scan(/\b(?!age\b)\b(?!key\b)\w+/)] : Convertimos todo en hash.
+    
+    {"IAfpK"=>"58", "WNVdi"=>"64", "jp9zt"=>"47", "0Sr4C"=>"68", "CGEqo"=>"76", "IxKVQ"=>"79", "eD221"=>"29", "XZbHV"=>"32", "k1SN5"=>"88", 
+    "4SCsU"=>"65", "q3kG6"=>"33", "MGQpf"=>"13", "Kj6xW"=>"14", "tg2VM"=>"30", "WSnCU"=>"24", "f1Vvz"=>"46", "dOS7A"=>"72", "tDojg"=>"82", 
+    "nZyJA"=>"48", "R8JTk"=>"29"}
+
+Hash[*JSON.parse(response)["data"].scan(/\b(?!age\b)\b(?!key\b)\w+/)].select{|k,v| v.to_i >= 50} : Seleccionamos los registros que sean igual o mayor que 50
+    
+    {"IAfpK"=>"58", "WNVdi"=>"64", "0Sr4C"=>"68", "CGEqo"=>"76", "IxKVQ"=>"79", "k1SN5"=>"88", "4SCsU"=>"65", "dOS7A"=>"72", "tDojg"=>"82"}
+
+Hash[*JSON.parse(response)["data"].scan(/\b(?!age\b)\b(?!key\b)\w+/)].select{|k,v| v.to_i >= 50}.size : Muestra la cantidad de registros que tienen la edad
+igual o mayor que 50.
+    
+    => 9 
+    
+</details>
+
+
+
