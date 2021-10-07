@@ -6,6 +6,9 @@ Coderbyte: es una solución de pruebas previas al empleo basada en la nube que a
 
 Codewar: (Wikipedia) es una comunidad educativa de programación de sistemas. En la plataforma, los desarrolladores de software participan en desafíos de programación conocidos como kata. Estos ejercicios entrenan un rango de habilidades en una variedad de lenguajes de programación y se completan dentro de un ambiente de desarrollo integrado en línea, en el que los usuarios tienen la posibilidad de ganar rangos y honor
 
+Mi perfil en Codewar:   
+https://www.codewars.com/users/pomer/completed
+
 TestDome: pruebas automatizadas de habilidades previas al empleo. Para probar si un candidato será bueno en el trabajo, la solución ofrece una muestra del trabajo real.
 
 ---
