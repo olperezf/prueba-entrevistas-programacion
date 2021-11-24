@@ -265,6 +265,56 @@ igual o mayor que 50.
     => 9 
     
 </details>
+    
+## Ejercicio #5:
+    Plataforma: Coderbyte
+    Lenguaje: Ruby
+    
+<details>
+    <summary> Haga que la función MathChallenge(num) tome el parámetro num que se está pasando y determine el número de dos dígitos más grande
+        dentro del número entero. Por ejemplo: si num es 4759472, entonces su programa debería devolver 94 porque ese es el más grande
+        número de dos dígitos. La entrada siempre contendrá al menos dos dígitos positivos.
 
+Ejemplo:
 
+    input: 453857
+    Output: 85
 
+    input: 363223311
+    Output: 63 
+        
+</summary>    
+
+Solución:
+
+    def MathChallenge(num)
+      return num.to_s.scan(/./).each_cons(2).to_a.map(&:join).max.to_i
+    end
+
+    MathChallenge(13575396797)
+    
+Salida consola:
+
+     => 97 
+    
+Análisis:    
+
+num.to_s.scan(/./) : Convertimos el numero en String para luego convertir cada numero en elemento de un array por ejemplo:
+    
+    ["1", "3", "5", "7", "5", "3", "9", "6", "7", "9", "7"]
+
+A continuación utilizamos .each_cons(2).to_a : es un método  que itera para N (en nuestro caso N es = 2) elementos consecutivos 
+comenzando desde cada elemento cada vez, convirtiendo cada elemento en un arreglo:
+    
+    [["1", "3"], ["3", "5"], ["5", "7"], ["7", "5"], ["5", "3"], ["3", "9"], ["9", "6"], ["6", "7"], ["7", "9"], ["9", "7"]]
+    
+map(&:join) : Hacemos un join por cada elemento:
+    
+    ["13", "35", "57", "75", "53", "39", "96", "67", "79", "97"] 
+    
+Y finalizamos con max.to_i : buscamos el numero mayor del arreglo y lo convertimos en entero:
+    
+    97
+     
+
+</details>    
