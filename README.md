@@ -150,8 +150,8 @@ incluido en la lista devuelta, donde AAAA, MM y DD son números que representan 
 
 Ejemplo:
 
-    transform_date_format(["2010/02/20","19/12/2016","11-18-2012","20130720"]) 
-    debería retornar una lista:  ["20100220","20161219","20121118"]. 
+    transform_date_format(["2010/02/20", "19/12/2016", "","11-18-2012", "20130720",nil,"2016-10-29"])
+    debería retornar una lista:  ["20100220", "20161219", "20121118", "20161029"]. 
 </summary>
 
 Solución:
