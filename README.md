@@ -159,22 +159,23 @@ Solución:
     require 'date'
     
     def transform_date_format(dates)
-       result =[]
-       for key in 0..(dates.length-1) do
-         result.push(Date.strptime(dates[key], "%m-%d-%Y").strftime('%Y%m%d')) if dates[key].include?"-"
-         result.push(Date.parse(dates[key]).strftime('%Y%m%d')) if dates[key].include?"/"
-       end 
-       return result
+       return (dates.compact.map {|d| d.match?(/[^0-9]/) ? d : ""} - [""]).map do |date|
+          date = Date.strptime(date, "%m-%d-%Y").to_s  if date.include?("-") && !(date[4]=="-")
+          Date.parse(date.tr('-','/')).strftime('%Y%m%d')
+       end
     end  
 
-    p transform_date_format(["2010/02/20", "19/12/2016", "11-18-2012", "20130720"])
+    p transform_date_format(["2010/02/20", "19/12/2016", "","11-18-2012", "20130720",nil,"2016-10-29"])
     
 Salida consola:
 
-    ["20100220", "20161219", "20121118"]
+    ["20100220", "20161219", "20121118", "20161029"]
     
 Análisis:  
 
+compact : elimina los null del array 
+d.match?(/[^0-9]/) : comnparo si tengo un string que no tenga "- /", en nuestro caso es: "20130720", y lo seteo vacìo para luego 
+eliminar todos los valores del array que esten "", ya que me piden que no lo muestre en la salida.   
 Date.strptime : es un método de clase DateTime que analiza la representación dada de fecha y hora con la plantilla dada.    
 strftime('%Y%m%d') : es un método de clase de tiempo que devuelve el formato.   
 Date.parse(dates[key]) : parsea  formatos de fechas incluyendo yyyy/mm/dd, dd/mm/yyyy.   
