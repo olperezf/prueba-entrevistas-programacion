@@ -318,4 +318,70 @@ Y finalizamos con max.to_i : buscamos el numero mayor del arreglo y lo convertim
     97
      
 
+</details> 
+    
+## Ejercicio #6:
+    Plataforma: Mahisoft
+    Lenguaje: Ruby
+    
+<details>
+    <summary>Numeros Amigos: Se dice que dos numeros son amigos si la suma de los divisores de uno es igual al otro. Se desea que 
+             implemente una funcion que reciba dos numeros enteros, positivos, y decida si los mismos son numeros amigos o no. 
+             Especificación de la entrada: La primera y única linea de la entrada contendrá dos numeros a y b separados por espacio.
+             Especificación de la salida: Debe imprimir una linea con el texto True si los números son amigos o False de no serlo.
+             
+
+Ejemplo:
+
+    input: 220 284
+    Output: True
+
+    Por ejemplo, 220 y 284 son amigos, dado que:
+    S(220)= 1 + 2 + 4 + 5 + 10 +11 + 20 + 22 + 44 +55 + 110 = 284
+    S(284)= 1 + 2 + 4 + 71 + 142 = 220    
+        
+</summary>    
+
+Solución:
+
+    def numbers_friends
+      a,b = gets.chomp.split(" ").map(&:to_i)
+      f = [a,b].map! { |v| (1..v-1).map { |j| j if (v % j).eql?0 }.compact.sum }
+      return (f[0]==b && f[1]==a) && (a!=0 && b!=0) ? true : false
+    end
+
+    p numbers_friends
+    
+Entrada por consola:
+    
+    220 284
+    
+Salida consola:
+
+     => True 
+    
+Análisis:    
+
+gets.chomp : Nos da la entrada por consola.
+    
+split(" ").map(&:to_i): corta los numeros en dos partes y lo convierte en enteros.
+    
+a,b = gets.chomp.split(" ").map(&:to_i): Asigna los numeros a las variables a y b. 
+    
+f = [a,b].map! { |v| (1..v-1).map { |j| j if (v % j).eql?0 }.compact.sum }  
+   
+[a,b].map! { |v| : primero mapeamos el valor de a en |v| y luego procedemos con el otro mapeo  
+
+(1..v-1).map { |j| j if (v % j).eql?0 }.compact.sum } : aqui estamos mapeando el valor ya que en nuestro caso es 220 quedando: (1..220-1),
+ahora dentro de este ciclo va iterando hasta llegar a 219 ya que no se puede dividir el mismo. Utilizamos el modulo % para dividir y si da como 
+resultado 0 es una division exacta y entra en el if con el valor de j acumulando asi los divisores, para luego utilizar la funcion compact y eliminar los nil, y luego .sum para sumar todos los valores y este resultado asignarlo al primer elemento del array haciendo un destructive methods con map! y luego
+asignarle los valores a f.   
+    
+(f[0]==b && f[1]==a) : hacemos una comparaciòn si el primer elemento del array que tiene el resultado de la sumatoria de los divisores de a, 
+es igual al valor de b. Igual hacemos la comparacion para el segundo elemento del array con el valor de b. Si esta condiciòn se cumple tenemos
+numeros amigos True.
+    
+(a!=0 && b!=0) : Esta validaciòn es para no tomar los 0 como numeros amigos.     
+
 </details>    
+
