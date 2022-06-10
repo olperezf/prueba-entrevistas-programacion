@@ -384,4 +384,69 @@ numeros amigos True.
 (a!=0 && b!=0) : Esta validaciòn es para no tomar los 0 como numeros amigos.     
 
 </details>    
+    
+## Ejercicio #7:
+    Plataforma: Mahisoft
+    Lenguaje: Ruby
+    
+<details>
+    <summary>En Mahisoft la seguridad es muy importante y por esto fue desarrollado un algoritmo de encriptacion muy seguro 
+        que, como resultado, entrega una cadena de caracteres compuesta unicamente de letras mayusculas. Accidentalemnte, se descubrió 
+        que con mucha frecuencia la misma lera ocurría varias veces de manera consecutiva, y se observó que se podia aprovechar esta cualidad 
+        para comprimir la cadena de texto. 
+        Se pide de su ayuda para implementar un metodo que, dada una cadena de caracteres como entrada, retorne la misma cadena pero 
+        reemplazando caracteres seguidos repetidos por el número de apariciones de dicho caracter, seguido del caracter en sí.
+        Especificación de la entrada: La primera y única linea de la entrada contendrá una cadena de letras en mayusculas sin ningun 
+        tipo de separación.
+        Especificacion de la salida: Debe imprimir una única linea con la correspondiente compresión de los caracteres.
+             
+
+Ejemplo:
+
+    input: ABBBBCELL
+    Output: A4BCE2L  
+        
+</summary>    
+
+Solución:
+
+    def encryption(s)
+      hash =  Hash.new(0).tap { |h| s.split("").each { |v| h[v] += 1 } }
+      return hash.map { |k,v| ((v.to_i > 1) ? v.to_s << k.to_s : k.to_s)  }.join
+    end
+    
+Entrada y llamada al método:
+    
+    encryption("ABBBBCELLL")
+    
+Salida consola:
+
+     => A4BCE2L 
+    
+Análisis:    
+
+hash = Hash.new(0).tap { |h| s.split("").each { |v| h[v] += 1 } }
+
+Hash.new(0).tap { |h|  }: en esta parte del código se tiene una inicialización de un hash como default 0, aplicando el 
+método .tap para trabajar el objeto Hash devolviendo los valores correspondiente.  
+    
+s.split("").each { |v| h[v] += 1 } : Se toma el string de caracteres separando cada caracter con el método split, y luego
+iteramos por cada caracter utilizando el hash h[v] con el valor de key en v, y asignandole el value con h[v]+= 1, donde si hay
+repeticiòn se va sumando. Y luego se tiene un nuevo hash:
+    
+    {"A"=>1, "B"=>4, "C"=>1, "E"=>1, "L"=>3}
+    
+Y ahora trabajamos el nuevo hash con:
+    
+hash.map { |k,v| ((v.to_i > 1) ? v.to_s << k.to_s : k.to_s)  }.join : aquí mapeamos el hash donde si tenemos el valor mayor a 1
+concatenamos el resultado con el value y el key sino traera solamente el key. Ejemplo sin aplicar el join:
+    
+    ["A", "4B", "C", "E", "3L"]
+
+Y con el join nos une la cadena:
+    
+    "A4BCE3L"
+
+    
+</details>        
 
